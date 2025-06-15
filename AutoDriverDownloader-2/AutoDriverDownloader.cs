@@ -95,7 +95,7 @@ namespace AutoDriverDownloader_2
 
                     // Checks if device is a mouse or keyboard
                     if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(deviceId) && (name.Contains("mouse") ||
-                         name.Contains("keyboard")))
+                         name.Contains("keyboard") || name.Contains("headset")))
                     {
                         Console.WriteLine($"Device: {name}");
                         infoBox.Text += $"\nDevice: {name}";
