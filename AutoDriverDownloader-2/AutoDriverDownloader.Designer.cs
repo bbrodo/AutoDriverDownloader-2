@@ -36,17 +36,19 @@
             this.driverListLbl = new System.Windows.Forms.Label();
             this.downloadBtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // Title
             // 
             this.Title.AutoSize = true;
             this.Title.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Title.Location = new System.Drawing.Point(240, 9);
+            this.Title.Location = new System.Drawing.Point(266, 9);
             this.Title.Name = "Title";
             this.Title.Size = new System.Drawing.Size(301, 29);
             this.Title.TabIndex = 0;
             this.Title.Text = "Auto Driver Downloader 2";
+            this.Title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // infoBox
             // 
@@ -107,12 +109,27 @@
             this.label1.TabIndex = 6;
             this.label1.Text = resources.GetString("label1.Text");
             // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Myanmar Text", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(281, 455);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(270, 30);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Copyright © 2025 - Brodey Bright";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // AutoDriverDownloader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(814, 457);
+            this.ClientSize = new System.Drawing.Size(814, 494);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.downloadBtn);
             this.Controls.Add(this.driverListLbl);
@@ -137,6 +154,7 @@
         private System.Windows.Forms.Label driverListLbl;
         private System.Windows.Forms.Button downloadBtn;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label3;
     }
 }
 
