@@ -122,6 +122,18 @@ namespace AutoDriverDownloader_2
                                 {
                                     driverList.Add("RAZER");
                                 }
+                                else if (vendor.Contains("CORSAIR") && !driverList.Contains("CORSAIR"))
+                                {
+                                    driverList.Add("CORSAIR");
+                                }
+                                else if (vendor.Contains("ASUS") && !driverList.Contains("ASUS"))
+                                {
+                                    driverList.Add("ASUS");
+                                }
+                                else if (vendor.Contains("STEELSERIES") && !driverList.Contains("STEELSERIES"))
+                                {
+                                    driverList.Add("STEELSERIES");
+                                }
                                 Console.WriteLine($"  Manufacturer: {vendor}");
                                 infoBox.Text += $"\n  Manufacturer: {vendor}";
                             }
