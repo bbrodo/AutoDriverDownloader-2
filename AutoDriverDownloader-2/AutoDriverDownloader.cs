@@ -27,13 +27,9 @@ namespace AutoDriverDownloader_2
 
         }
 
-        private void startButton_Click(object sender, EventArgs e)
+        //Get CPU Name
+        public void CpuSearch(List<string> driverList)
         {
-            infoBox.Text = "Starting...\n";
-            List<string> driverList = new List<string>();
-            //Get CPU Name
-            Console.WriteLine("=== CPU Information ===");
-            infoBox.Text += "=== CPU Information ===";
             using (var cpuSearcher = new ManagementObjectSearcher("select * from Win32_Processor"))
             {
                 foreach (ManagementObject obj in cpuSearcher.Get())
@@ -54,10 +50,11 @@ namespace AutoDriverDownloader_2
                     infoBox.Text += "\nCPU Name: " + name;
                 }
             }
+        }
 
-            // Get GPU Name
-            Console.WriteLine("\n=== GPU Information ===");
-            infoBox.Text += "\n=== GPU Information ===";
+        // Get GPU Name
+        public void GpuSearch(List<string> driverList)
+        {
             using (var gpuSearcher = new ManagementObjectSearcher("select * from Win32_VideoController"))
             {
                 string dedicatedGpu = null;
@@ -82,10 +79,11 @@ namespace AutoDriverDownloader_2
                 infoBox.Text += "\nGPU Name: " + dedicatedGpu;
             }
 
-            // Gets Peripheral Devices
-            Console.WriteLine("\n=== Input Devices with Vendor Info ===");
-            infoBox.Text += "\n=== Input Devices with Vendor Info ===";
+        }
 
+        // Gets Peripheral Devices
+        public void PeripheralSearch(List<string> driverList)
+        {
             using (var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity"))
             {
                 foreach (ManagementObject device in searcher.Get())
@@ -111,28 +109,48 @@ namespace AutoDriverDownloader_2
 
                             string vendor = GetVendorName(vid);
                             // adds drivers to driver list
-                            //WIP NEED TO MAKE A METHOD TO AUTOMATE THIS
+                            Console.WriteLine("VENDOR!!!!" + vendor);
+
                             if (vendor != null)
                             {
-                                if (vendor.Contains("LOGITECH") && !driverList.Contains("LOGITECH"))
+
+                                switch (vendor)
                                 {
-                                    driverList.Add("LOGITECH");
-                                }
-                                else if (vendor.Contains("RAZER") && !driverList.Contains("RAZER"))
-                                {
-                                    driverList.Add("RAZER");
-                                }
-                                else if (vendor.Contains("CORSAIR") && !driverList.Contains("CORSAIR"))
-                                {
-                                    driverList.Add("CORSAIR");
-                                }
-                                else if (vendor.Contains("ASUS") && !driverList.Contains("ASUS"))
-                                {
-                                    driverList.Add("ASUS");
-                                }
-                                else if (vendor.Contains("STEELSERIES") && !driverList.Contains("STEELSERIES"))
-                                {
-                                    driverList.Add("STEELSERIES");
+                                    case "LOGITECH":
+                                        if (driverList.Contains("LOGITECH"))
+                                        {
+                                            break;
+                                        }
+                                        driverList.Add("LOGITECH");
+                                        break;
+                                    case "RAZER":
+                                        if (driverList.Contains("RAZER"))
+                                        {
+                                            break;
+                                        }
+                                        driverList.Add("RAZER");
+                                        break;
+                                    case "CORSAIR":
+                                        if (driverList.Contains("CORSAIR"))
+                                        {
+                                            break;
+                                        }
+                                        driverList.Add("CORSAIR");
+                                        break;
+                                    case "ASUS":
+                                        if (driverList.Contains("ASUS"))
+                                        {
+                                            break;
+                                        }
+                                        driverList.Add("ASUS");
+                                        break;
+                                    case "STEELSERIES":
+                                        if (driverList.Contains("STEELSERIES"))
+                                        {
+                                            break;
+                                        }
+                                        driverList.Add("STEELSERIES");
+                                        break;
                                 }
                                 Console.WriteLine($"  Manufacturer: {vendor}");
                                 infoBox.Text += $"\n  Manufacturer: {vendor}";
@@ -145,9 +163,32 @@ namespace AutoDriverDownloader_2
                         }
                     }
                 }
+                Console.WriteLine("Detected Driver: " + driverList[driverList.Count() - 1]);
+                infoBox.Text += "\nDetected Driver: " + driverList[driverList.Count() - 1];
             }
-            Console.WriteLine("Detected Driver: " + driverList[driverList.Count() - 1]);
-            infoBox.Text += "\nDetected Driver: " + driverList[driverList.Count() - 1];
+        }
+
+        public void startButton_Click(object sender, EventArgs e)
+        {
+            infoBox.Text = "Starting...\n";
+            List<string> driverList = new List<string>();
+            //Get CPU Name
+            Console.WriteLine("=== CPU Information ===");
+            infoBox.Text += "=== CPU Information ===";
+            CpuSearch(driverList);
+            
+
+            // Get GPU Name
+            Console.WriteLine("\n=== GPU Information ===");
+            infoBox.Text += "\n=== GPU Information ===";
+            GpuSearch(driverList);
+
+            // Gets Peripheral Devices
+            Console.WriteLine("\n=== Input Devices with Vendor Info ===");
+            infoBox.Text += "\n=== Input Devices with Vendor Info ===";
+            PeripheralSearch(driverList);
+
+           
             //sends list of drivers to the download handler
             string[] driverArray = driverList.ToArray();
             driverListBox.Items.AddRange(driverArray);
